@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
  - The plivo gem and some configuration for it.
+ - CompanyNumber, UserNumber and User models.
 
 ## 0.0.1 - 2016-12-05
 ### Added
