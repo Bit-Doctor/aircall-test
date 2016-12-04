@@ -10,6 +10,18 @@ The story is the following:
 - Every user is connected to at least one Aircall App.
 
 It's 9AM in the office and first calls are coming in!
+## Setup
+
+You will need to create a `dev.env` and a `prod.env`.
+
+The available var are:
+```
+# Required
+PLIVO_ID=
+PLIVO_TOKEN=
+# Required in prod.env
+SECRET_KEY_BASE=
+```
 
 ## How to run
 

@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+ - The plivo gem and some configuration for it.
 
 ## 0.0.1 - 2016-12-05
 ### Added
