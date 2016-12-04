@@ -5,7 +5,7 @@ default: &default
   encoding: unicode
   username: <%= ENV.fetch("AIRCALL_DATABASE_USER") { "postgres" } %>
   password: <%= ENV.fetch("AIRCALL_DATABASE_PASSWORD") {} %>
-  host: <%= ENV.fetch("PRODUCTION_DATABASE_HOST") { "db" } %>
+  host: <%= ENV.fetch("AIRCALL_DATABASE_HOST") { "db" } %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: <%= ENV.fetch("DATABASE_CONNECTION_TIMEOUT") { 5000 } %>
 

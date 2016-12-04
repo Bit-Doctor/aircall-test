@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
  - The plivo gem and some configuration for it.
  - CompanyNumber, UserNumber and User models.
 
+### Changed
+ - The env variable for the db host is now `AIRCALL_DATABASE_HOST`.
+
 ## 0.0.1 - 2016-12-05
 ### Added
  - A README explaining what is the project and how to start it.
