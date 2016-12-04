@@ -1,0 +1,22 @@
+version: '2'
+services:
+  db:
+    restart: always
+    image: postgres:9.6-alpine
+    env_file: prod.env
+
+  web:
+    restart: always
+    image: aircall:production
+    build:
+      context: .
+      args:
+        bundle-without: test development
+    env_file: prod.env
+    environment:
+      RAILS_ENV: production
+    command: rails server -p 3000 -b '0.0.0.0'
+    ports:
+      - "80:3000"
+    links:
+      - db

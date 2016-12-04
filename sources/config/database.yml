@@ -1,0 +1,22 @@
+# PostgreSQL. Versions 9.1 and up are supported.
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: <%= ENV.fetch("AIRCALL_DATABASE_USER") { "postgres" } %>
+  password: <%= ENV.fetch("AIRCALL_DATABASE_PASSWORD") {} %>
+  host: <%= ENV.fetch("PRODUCTION_DATABASE_HOST") { "db" } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: <%= ENV.fetch("DATABASE_CONNECTION_TIMEOUT") { 5000 } %>
+
+development:
+  <<: *default
+  database: <%= ENV.fetch("AIRCALL_DATABASE_NAME") { "aircall_development" } %>
+
+test:
+  <<: *default
+  database: <%= ENV.fetch("AIRCALL_DATABASE_NAME") { "aircall_test" } %>
+
+production:
+  <<: *default
+  database: <%= ENV.fetch("AIRCALL_DATABASE_NAME") { "aircall_production" } %>
