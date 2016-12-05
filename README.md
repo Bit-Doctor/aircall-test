@@ -38,7 +38,13 @@ SECRET_KEY_BASE=
   docker-compose run --rm web rails db:setup
   ```
 
-3. **You can now see the app [live](http://localhost:8000)**
+4. **Setup plivo apps**
+
+  ```
+  docker-compose run --rm web rails plivo:init[YOUR_HOST]
+  ```
+
+5. **You can now see the app [live](http://localhost:8000)**
 
 ## How to deploy
 
@@ -62,6 +68,7 @@ SECRET_KEY_BASE=
   docker-compose -f docker-compose.prod.yml up --build -d
   docker-compose -f docker-compose.prod.yml run --rm web rails assets:precompile
   docker-compose -f docker-compose.prod.yml run --rm web rails db:setup
+  docker-compose -f docker-compose.prod.yml run --rm web rails plivo:init[YOUR_HOST]
   ```
 
 5. **You may need to add port `80` to your VPC**

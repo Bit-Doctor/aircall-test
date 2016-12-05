@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
  - A seed file.
  - Routes for hangup action and direct call.
+ - A task file to init plivo applications and endpoints.
 
 ## [0.0.3] - 2016-12-05
 ### Added
