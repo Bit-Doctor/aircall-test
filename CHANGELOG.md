@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
  - Plivo call authentication.
  - The call model to save call history.
+ - Calls controller and a index page listing the call history.
 
 ### Changed
  - Added a step in deployment section in the README.
