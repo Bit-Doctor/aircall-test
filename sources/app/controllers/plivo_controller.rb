@@ -3,6 +3,7 @@ require 'plivo'
 
 class PlivoController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_filter :verify_plivo_signature
 
   def forward
     to = params[:To]
@@ -65,6 +66,19 @@ class PlivoController < ApplicationController
 
   def record
     head :no_content
+  end
+
+  private
+
+  def verify_plivo_signature
+    signature = request.env["HTTP_X_PLIVO_SIGNATURE"]
+    auth_token = Rails.application.secrets.plivo["token"]
+    uri = request.url
+
+    hashed_params = Hash.new{[]}
+    params = request.body.read
+    hashed_params = hashed_params.merge(Hash[*URI.decode_www_form(params).flatten]) if params
+    head :unauthorized unless Plivo::XPlivoSignature.new(signature, uri, hashed_params, auth_token).is_valid?
   end
 
 end
