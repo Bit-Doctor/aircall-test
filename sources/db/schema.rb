@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922194944) do
+ActiveRecord::Schema.define(version: 20161205001443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 20150922194944) do
     t.string   "sip_endpoint"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "company_numbers_users", id: false, force: :cascade do |t|
+    t.integer "user_id",           null: false
+    t.integer "company_number_id", null: false
+    t.index ["company_number_id", "user_id"], name: "index_company_numbers_users_on_company_number_id_and_user_id", using: :btree
+    t.index ["user_id", "company_number_id"], name: "index_company_numbers_users_on_user_id_and_company_number_id", using: :btree
   end
 
   create_table "user_numbers", force: :cascade do |t|

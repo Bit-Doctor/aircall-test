@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
  - The plivo gem and some configuration for it.
  - CompanyNumber, UserNumber and User models.
+ - Add many to many relation between User and CompanyNumber.
 
 ### Changed
  - The env variable for the db host is now `AIRCALL_DATABASE_HOST`.
