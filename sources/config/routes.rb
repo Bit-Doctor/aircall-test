@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   post 'plivo/forward', to: 'plivo#forward', as: :plivo_forward
   post 'plivo/dial', to: 'plivo#dial', as: :plivo_dial
   post 'plivo/record', to: 'plivo#record', as: :plivo_record
+  post 'plivo/hangup', to: 'plivo#hangup', as: :plivo_hangup
+  post 'plivo/direct', to: 'plivo#direct', as: :plivo_direct
 end

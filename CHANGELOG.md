@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
  - A seed file.
+ - Routes for hangup action and direct call.
 
 ## [0.0.3] - 2016-12-05
 ### Added

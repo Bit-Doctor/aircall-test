@@ -84,6 +84,17 @@ class PlivoController < ApplicationController
     render xml: r.to_xml, content_type: 'application/xml'
   end
 
+  def hangup
+    head :no_content
+  end
+
+  def direct
+    r = Plivo::Response.new()
+    d = r.addDial()
+    d.addUser(params[:To])
+    render xml: r.to_xml, content_type: 'application/xml'
+  end
+
   private
 
   def verify_plivo_signature
