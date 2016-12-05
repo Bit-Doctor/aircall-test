@@ -60,6 +60,7 @@ SECRET_KEY_BASE=
 
   ```
   docker-compose -f docker-compose.prod.yml up --build -d
+  docker-compose -f docker-compose.prod.yml run --rm web rails assets:precompile
   docker-compose -f docker-compose.prod.yml run --rm web rails db:setup
   ```
 

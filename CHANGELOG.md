@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
  - Plivo call authentication.
 
+### Changed
+ - Added a step in deployment section in the README.
+
 ## [0.0.2] - 2016-12-05
 ### Added
  - The plivo gem and some configuration for it.
