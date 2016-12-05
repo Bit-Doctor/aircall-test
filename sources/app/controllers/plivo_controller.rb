@@ -6,10 +6,14 @@ class PlivoController < ApplicationController
   before_filter :verify_plivo_signature
 
   def forward
-    to = params[:To]
-    from = params[:From]
-    cname = params[:CallerName] ? params[:CallerName] : ''
-    company_numbers = CompanyNumber.find_by! sip_endpoint: to
+    company_numbers = CompanyNumber.find_by! sip_endpoint: params[:To]
+
+    Call.create({
+      uuid: params[:CallUUID],
+      caller_name: params[:CallerName],
+      caller_number: params[:From],
+      company_number: company_numbers,
+    })
 
     r = Plivo::Response.new()
     # Greet the caller.
@@ -30,7 +34,7 @@ class PlivoController < ApplicationController
       d = r.addDial(dial_params)
       user.user_numbers.each do |number|
         # Ring all user_numbers at the same time.
-        d.addUser(number.sip_endpoint || "sip:")
+        d.addUser(number.sip_endpoint)
       end
     end
 
@@ -41,13 +45,14 @@ class PlivoController < ApplicationController
                "Thank you!")
     record_params = {
       action: plivo_record_url,
+      redirect: false,
       method: 'POST',
       finishOnKey: '#',
     }
     r.addRecord(record_params)
 
     # Then hangup.
-    r.addHangup()
+    r.addHangup(reason: 'busy')
 
     render xml: r.to_xml, content_type: 'application/xml'
   end
@@ -58,6 +63,12 @@ class PlivoController < ApplicationController
 
     # Someone responded so we can hangup the call
     if params[:DialStatus] == 'completed'
+      call = Call.find_by! uuid: params[:CallUUID]
+      user_number = UserNumber.find_by! sip_endpoint: params[:DialBLegTo]
+      call.respondent_number = user_number
+      call.respondent = user_number.user
+      call.save
+
       r.addHangup()
     end
 
@@ -65,7 +76,12 @@ class PlivoController < ApplicationController
   end
 
   def record
-    head :no_content
+    call = Call.find_by! uuid: params[:CallUUID]
+    call.record_url = params[:RecordUrl]
+    call.save
+
+    r = Plivo::Response.new()
+    render xml: r.to_xml, content_type: 'application/xml'
   end
 
   private
